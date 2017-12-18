@@ -11,13 +11,217 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 	<link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>
-</head>
-<body>
+	<!-- Styling -->
+	<style>
+		.jumbotron {
+		background-color: #f4511e;
+		color: #fff;
+		padding: 100px 25px;
+		}
 
-<div class="jumbotron">
-	<h1>Quinn Ciccoretti <small>The undeniable source for information on Quinn</small></h1>
+		.container-fluid {
+		padding: 60px 50px;
+		}
+		/* Add an orange color to all icons and set the font-size */
+		.logo-small {
+			color: #f4511e;
+			font-size: 50px;
+		}
+
+		.logo {
+			color: #f4511e;
+			font-size: 200px;
+		}
+		.navbar {
+			margin-bottom: 0;
+			background-color: #f4511e;
+			z-index: 9999;
+			border: 0;
+			font-size: 12px !important;
+			line-height: 1.42857143 !important;
+			letter-spacing: 4px;
+			border-radius: 0;
+		}
+
+		.navbar li a, .navbar .navbar-brand {
+			color: #fff !important;
+		}
+
+		.navbar-nav li a:hover, .navbar-nav li.active a {
+			color: #f4511e !important;
+			background-color: #fff !important;
+		}
+
+		.navbar-default .navbar-toggle {
+			border-color: transparent;
+			color: #fff !important;
+		}
+		#synonymbox{
+			background-color: black;
+			color: white;
+			font-style:italic;
+			border: 10px solid black;
+			border-radius:15px;
+		}
+		.thumbnail {
+			padding: 0 0 15px 0;
+			border: none;
+			border-radius: 0;
+		}
+
+		.thumbnail img {
+			width: 400px;
+			height: 400px;
+			margin-bottom: 10px;
+			border: 5px solid #f4511e;;
+			border-radius:10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			console.log("Initialized...");
+			var synonyms = ["incontrovertible","indisputable","undeniable","authoritative","quintessential","irrefutable","exhaustive"];
+			//var synonyms = ["authoritative", "test"]
+			var count = 0;
+			var update_synonyms = function(){
+				var new_pick = synonyms[count];
+				$("#synonymbox").fadeOut("slow", function(){
+					$("#synonymbox").html(new_pick);
+				});
+				$("#synonymbox").fadeIn("slow");
+
+				count++;
+				if(count == synonyms.length){
+					count = 0;
+				}
+			}
+			window.setInterval(update_synonyms, 4000);
+
+		}
+	</script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+
+<div class="jumbotron" id = "maintitle">
+	<h1>Quinn Ciccoretti <small>The <strong id = "synonymbox" > authoritative</strong> source of information on Quinn</small></h1>
 	<p></p> 
 </div>
+<style>
+.bg-grey {
+    background-color: #f6f6f6;
+}
+</style>
+<style>
+.logo {
+    font-size: 200px;
+}
+@media screen and (max-width: 768px) {
+    .col-sm-4 {
+        text-align: center;
+        margin: 25px 0;
+    }
+}
+</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="#">Quinn Ciccoretti</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid" id = "about">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>About Company Page</h2>
+      <h4>Lorem ipsum..</h4> 
+      <p>Lorem ipsum..</p>
+      <button class="btn btn-default btn-lg">Get in Touch</button>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-signal logo"></span>
+    </div>
+  </div>
+</div>
 
+<div class="container-fluid text-center bg-grey" id = "projects">
+	<h2>PROJECTS</h2>
+	<hr>
+	<div class="row text-center">
+		<div class="col-sm-6" >
+			<a href ="https://github.com/QuinnCiccoretti/">
+				<div class="thumbnail">
+					<img src="git-icon.jpeg" alt="Github">
+					<h2><strong>Github Pages</strong></h2>
+				</div>
+			</a>
+		</div>
+		<div class="col-sm-6">
+			<a href ="https://github.com/QuinnCiccoretti/ResProject">
+				<div class="thumbnail">
+					<img src="research-icon.png" alt="ResearchProject">
+					<h2>Research Project</h2>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-sm-6">
+			<a href = "https://www.khanacademy.org/profile/quinn.ciccoretti/">
+				<div class="thumbnail">
+					<img src="khan-icon.jpeg" alt="Khanacademy">
+					<h2><strong>Khanacademy</strong></h2>
+				</div>
+			</a>
+		</div>
+		<div class="col-sm-6">
+			<a href ="https://www.crossresults.com/racer/103373">
+				<div class="thumbnail">
+					<img src="bike-icon.jpg" alt="Cycling">
+					<h2>Cycling</h2>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-grey" id = "contact">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p> 
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
 </body>
 </html>
