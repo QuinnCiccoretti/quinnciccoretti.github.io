@@ -1,2 +1,2 @@
 # quinnciccoretti.github.io
-Personal website for Quinn Ciccoretti
+The official personal website for Quinn Ciccoretti
