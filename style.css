@@ -53,7 +53,10 @@
 			border: 1px solid white;
 			border-radius: 10px;
 		}
+		.thumbnail:hover{
+			transform: rotate(5deg); /* Standard syntax */
 
+		}
 		.thumbnail img {
 			/*width: 400px;*/
 			/*height: 400px;*/
