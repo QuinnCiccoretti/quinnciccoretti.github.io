@@ -1,0 +1,63 @@
+.jumbotron {
+		background-color: #f4511e;
+		color: #fff;
+		padding: 100px 25px;
+		}
+
+		.container-fluid {
+		padding: 60px 50px;
+		}
+		/* Add an orange color to all icons and set the font-size */
+		.logo-small {
+			color: #f4511e;
+			font-size: 50px;
+		}
+
+		.logo {
+			color: #f4511e;
+			font-size: 200px;
+		}
+		.navbar {
+			margin-bottom: 0;
+			background-color: #f4511e;
+			z-index: 9999;
+			border: 0;
+			font-size: 12px !important;
+			line-height: 1.42857143 !important;
+			letter-spacing: 4px;
+			border-radius: 0;
+		}
+
+		.navbar li a, .navbar .navbar-brand {
+			color: #fff !important;
+		}
+
+		.navbar-nav li a:hover, .navbar-nav li.active a {
+			color: #f4511e !important;
+			background-color: #fff !important;
+		}
+
+		.navbar-default .navbar-toggle {
+			border-color: transparent;
+			color: #fff !important;
+		}
+		#synonymbox{
+			background-color: black;
+			color: white;
+			font-style:italic;
+			border: 10px solid black;
+			border-radius:15px;
+		}
+		.thumbnail {
+			padding: 0 0 15px 0;
+			border: 1px solid white;
+			border-radius: 10px;
+		}
+
+		.thumbnail img {
+			/*width: 400px;*/
+			/*height: 400px;*/
+			margin-bottom: 10px;
+			border: 5px solid #f4511e;;
+			border-radius:10px;
+		}
