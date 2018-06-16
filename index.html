@@ -9,12 +9,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
-	<link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="./img/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<!-- Styling -->
 	
 	<script type="text/javascript">
+		window.onscroll = scrollfunction;
 		window.onload = function(){
 			console.log("Initialized...");
 			var synonyms = ["incontrovertible","indisputable","undeniable","authoritative","quintessential","irrefutable","exhaustive"];
@@ -35,14 +35,29 @@
 			window.setInterval(update_synonyms, 4000);
 
 		}
+	
+		function scrollfunction(){
+			var body = document.body,
+		    html = document.documentElement;
+		    var height = Math.max( document.body.scrollHeight, document.documentElement.scrollHeight,
+			  document.body.offsetHeight, document.documentElement.offsetHeight,
+			  document.body.clientHeight, document.documentElement.clientHeight);
+		    var s =  window.pageYOffset;
+		    var th = (s/height)*(244/132)*244;
+		   
+		    document.getElementById('stance').style.top = th/(1.5*(height/2104)) + "%";
+		    
+		    console.log(height);
+		}
 	</script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
+<img id="stance" src="./img/stance2.png">
 
 <div class="jumbotron" id = "maintitle">
-	<h1>Quinn Ciccoretti <small>The <strong id = "synonymbox" > authoritative</strong> source of information on Quinn</small></h1>
-	<p></p> 
+	<h1>Quinn Ciccoretti <br> <small>The <strong id = "synonymbox" > authoritative</strong> source of information on Quinn</small></h1>
+	
 </div>
 <style>
 .bg-grey {
@@ -74,7 +89,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#activities">ACTIVITIES</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#resume">RESUME</a></li>
       </ul>
     </div>
   </div>
@@ -82,10 +97,8 @@
 <div class="container-fluid" id = "about">
   <div class="row">
     <div class="col-sm-8">
-      <h2>About Company Page</h2>
-      <h4>Lorem ipsum..</h4> 
-      <p>Lorem ipsum..</p>
-      <button class="btn btn-default btn-lg">Get in Touch</button>
+      <h2>Yes, It's Me.</h2>
+     
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-signal logo"></span>
@@ -100,15 +113,15 @@
 		<div class="col-sm-4 col-sm-offset-1" >
 			<a href ="https://github.com/QuinnCiccoretti/">
 				<div class="thumbnail">
-					<img class = "img-thumbnail" src="git-icon.jpeg" alt="Github">
+					<img class = "img-thumbnail" src="./img/git-icon.jpeg" alt="Github">
 					<h2><strong>Github Pages</strong></h2>
 				</div>
 			</a>
 		</div>
 		<div class="col-sm-4 col-sm-offset-2">
-			<a href ="https://github.com/QuinnCiccoretti/ResProject">
+			<a href ="https://github.com/QuinnCiccoretti/physvr">
 				<div class="thumbnail">
-					<img class = "img-thumbnail" src="research-icon.png" alt="ResearchProject">
+					<img class = "img-thumbnail" src="./img/research-icon.png" alt="ResearchProject">
 					<h2>Research Project</h2>
 				</div>
 			</a>
@@ -118,7 +131,7 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<a href = "https://www.khanacademy.org/profile/quinn.ciccoretti/">
 				<div class="thumbnail">
-					<img class = "img-thumbnail" src="khan-icon.jpeg" alt="Khanacademy">
+					<img class = "img-thumbnail" src="./img/khan-icon.jpeg" alt="Khanacademy">
 					<h2><strong>Khanacademy</strong></h2>
 				</div>
 			</a>
@@ -126,37 +139,21 @@
 		<div class="col-sm-4 col-sm-offset-2">
 			<a href ="https://www.crossresults.com/racer/103373">
 				<div class="thumbnail">
-					<img class = "img-thumbnail" src="bike-icon.jpg" alt="Cycling">
+					<img class = "img-thumbnail" src="./img/bike-icon.jpg" alt="Cycling">
 					<h2>Cycling</h2>
 				</div>
 			</a>
 		</div>
 	</div>
 </div>
-<div class="container-fluid bg-grey" id = "contact">
-  <h2 class="text-center">CONTACT</h2>
+<div class="container-fluid bg-grey" id = "resume">
+  <h2 class="text-center">RESUME</h2>
   <div class="row">
     <div class="col-sm-5">
-      <p>Contact us and we'll get back to you within 24 hours.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p> 
+
     </div>
     <div class="col-sm-7">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-        </div>
-      </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-      <div class="row">
-        <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Send</button>
-        </div>
-      </div> 
+      
     </div>
   </div>
 </div>
