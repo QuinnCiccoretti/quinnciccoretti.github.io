@@ -11,7 +11,6 @@ iframe{
 	display: inline-block;
 	padding-top: 5%;
 	/*transform: rotate(-45deg);*/
-	z-index: 99;
 	left: 80%;
 }
 .jumbotron {
@@ -36,7 +35,7 @@ padding: 60px 50px;
 .navbar {
 	margin-bottom: 0;
 	background-color: #f4511e;
-	z-index: 9999;
+	/*z-index: 9999;*/
 	border: 0;
 	font-size: 12px !important;
 	line-height: 1.42857143 !important;
@@ -70,7 +69,8 @@ padding: 60px 50px;
 	border-radius: 10px;
 }
 .thumbnail:hover{
-	transform: rotate(5deg); /* Standard syntax */
+	border: 5px solid white;
+	
 
 }
 .thumbnail img {
