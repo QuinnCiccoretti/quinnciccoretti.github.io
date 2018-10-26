@@ -12,12 +12,10 @@
 	<link rel="shortcut icon" type="image/png" href="./img/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<!-- Styling -->
-	<link rel="stylesheet" media="all" href="./Resume6-16-18_files/stockholm.css">
-    <script src="./Resume6-16-18_files/application.js"></script>
+	<link rel="stylesheet" media="all" href="./Resume_Files/stockholm.css">
+    <script src="./Resume_Files/application.js"></script>
 	<script type="text/javascript">
-		window.onscroll = scrollfunction;
 		window.onload = function(){
-			console.log("Initialized...");
 			var synonyms = ["incontrovertible","indisputable","undeniable","authoritative","quintessential","irrefutable","exhaustive","comprehensive", "complete","greatest","original"];
 			//var synonyms = ["authoritative", "test"]
 			var count = 0;
@@ -35,20 +33,6 @@
 			}
 			window.setInterval(update_synonyms, 4000);
 
-		}
-	
-		function scrollfunction(){
-			var body = document.body,
-		    html = document.documentElement;
-		    var height = Math.max( document.body.scrollHeight, document.documentElement.scrollHeight,
-			  document.body.offsetHeight, document.documentElement.offsetHeight,
-			  document.body.clientHeight, document.documentElement.clientHeight);
-		    var s =  window.pageYOffset;
-		    var th = (s/height)*(244/132)*244;
-		   
-		    document.getElementById('stance').style.top = th/(1.5*(height/2104)) + "%";
-		    
-		    console.log(height);
 		}
 	</script>
 </head>
@@ -97,7 +81,7 @@
 <div class="container-fluid" id = "resume">
   
     <!-- <div class="col-xl-12"> -->
-      <h2>Yes, It's Me.</h2>
+      <h1>Yes, It's Me.</h1>
       <div class="preview-box">
         <div class="container">
             <div class="main">
@@ -108,9 +92,16 @@
 	                    <div class = "col-sm-10">
 	                    <div class="experience-item" style="page-break-inside: avoid;">
 	                        <div class="item-title">Apprentice at U.S. Naval Research Laboratory, Washington, D.C.</div>
-	                        <div class="item-caption setting--primary-text">June 2017&nbsp;&nbsp;–&nbsp;&nbsp;August 2017</div>
+	                        <div class="item-caption setting--primary-text">June &nbsp;&nbsp;–&nbsp;&nbsp;August 2017</div>
 	                        <div class="item-description">
-	                            <div>Worked as programmer through the Office of Naval Research’s Science and Engineering Apprenticeship Program. Created application that synchronized eye- and head-trackers to determine the real-world accuracy of positional data from each device. Earned 2nd place in IT Division for presentation of the project to a panel of judges.</div>
+	                            <div>Worked as programmer through the Office of Naval Research’s Science and Engineering Apprenticeship Program. Created C++ application that synchronized eye- and head-trackers to determine the real-world accuracy of each device. Won 2nd place in IT division for presentation of project.</div>
+	                        </div>
+	                    </div>
+	                    <div class="experience-item" style="page-break-inside: avoid;">
+	                        <div class="item-title">Dessert Chef at Gaijin Ramen Shop Arlington</div>
+	                        <div class="item-caption setting--primary-text">June &nbsp;&nbsp;–&nbsp;&nbsp;August 2018</div>
+	                        <div class="item-description">
+	                            <div>Made shaved ice desserts with special attention to quality and beauty. Worked with chefs and servers in a team to fill orders efficiently. Used GrubHub and UberEats to organize and fulfill delivery orders.</div>
 	                        </div>
 	                    </div>
                 	</div>
@@ -119,6 +110,10 @@
 	                    <div class="group-title">
 	                        <div class="group-title-icon education col-sm-1"></div class = "col-sm-1">Education</div>
 	                    <div class = "col-sm-10">
+	                    <div class="experience-item" style="page-break-inside: avoid;">
+	                        <div class="item-title">University of Virginia</div>
+	                        <div class="item-caption setting--primary-text">August 2018&nbsp;&nbsp;–&nbsp;&nbsp;Present</div>
+	                    </div>
 	                    <div class="experience-item" style="page-break-inside: avoid;">
 	                        <div class="item-title">TJHSST</div>
 	                        <div class="item-caption setting--primary-text">September 2014&nbsp;&nbsp;–&nbsp;&nbsp;June 2018</div>
@@ -142,36 +137,17 @@
 	                    </div>
 	                    <div class="experience-item" style="page-break-inside: avoid;">
 	                        <div class="item-title">Troop 106 Senior Patrol Leader</div>
-	                        <div class="item-caption setting--primary-text">May 2017&nbsp;&nbsp;–&nbsp;&nbsp;December 2017</div>
+	                        <div class="item-caption setting--primary-text">May &nbsp;&nbsp;–&nbsp;&nbsp;December 2017</div>
 	                        <div class="item-description">
 	                            <div>Guided younger scouts, led troop meetings, implemented meeting-based merit badge program, and worked with adult leadership to plan activities. Coordinated and led several camping trips.</div>
 	                        </div>
 	                    </div>
 	                </div>
                 </div>
+                
                 <div class="experience-group row">
-                	
 	                    <div class="group-title">
-	                        <div class="group-title-icon custom col-sm-1"></div class = "col-sm-1">Athletics</div>
-	                    <div class = "col-sm-10">
-	                    <div class="experience-item" style="page-break-inside: avoid;">
-	                        <div class="item-title">National Capital Velo Club (Cycling Club) Member</div>
-	                        <div class="item-caption setting--primary-text">2013&nbsp;&nbsp;–&nbsp;&nbsp;2017</div>
-	                        <div class="item-description">
-	                            <div>Raced in 14 Road races and 27 Cyclocross races. 2 Top-5 finishes in 2016 Road race season and 2 Top-5 finishes in 2017 Cyclocross season.&nbsp;</div>
-	                        </div>
-	                    </div>
-	                    <div class="experience-item" style="page-break-inside: avoid;">
-	                        <div class="item-title">TJHSST Lacrosse Team</div>
-	                        <div class="item-caption setting--primary-text">2017&nbsp;&nbsp;–&nbsp;&nbsp;2018</div>
-	                        <div class="item-description"></div>
-	                    </div>
-	                </div>
-                </div>
-                <div class="experience-group row">
-                	
-	                    <div class="group-title">
-	                        <div class="group-title-icon custom col-sm-1"></div class = "col-sm-1">Academics</div>
+	                        <div class="group-title-icon custom col-sm-1"></div class = "col-sm-1">Awards</div>
 	                    <div class = "col-sm-10">
 	                    <div class="experience-item" style="page-break-inside: avoid;">
 	                        <div class="item-title">National Merit Finalist</div>
@@ -183,37 +159,7 @@
 	                        <div class="item-caption setting--primary-text"></div>
 	                        <div class="item-description"></div>
 	                    </div>
-	                    <div class="experience-item" style="page-break-inside: avoid;">
-	                        <div class="item-title">Spanish Honor Society Activities Coordinator, TJHSST</div>
-	                        <div class="item-caption setting--primary-text">May 2017&nbsp;&nbsp;–&nbsp;&nbsp;June 2018</div>
-	                        <div class="item-description">
-	                            <div>Work with other leadership to organize guest speakers, service opportunities, and club events. Spanish Honor Society Member, March 2016 - June 2018</div>
-	                        </div>
-	                    </div>
 	                </div>
-                </div>
-            </div>
-            <div class="aside">
-            	
-                <div class="aside-group">
-                    <div class="title">
-                        <!-- <div class="title-icon skills"></div> -->
-                    Skills</div>
-                    <div class="section">
-                        <div class="text">Website Design</div>
-                        <div class="text">Bicycle Repair</div>
-                        <div class="text">Computer Networking</div>
-                    </div>
-                </div>
-                <div class="aside-group">
-                    <div class="title">
-                        <!-- <div class="title-icon hobbies"></div> -->
-                    Hobbies</div>
-                    <div class="section">
-                        <div class="text">Hiking</div>
-                        <div class="text">Reading</div>
-                        <div class="text">Rapping</div>
-                    </div>
                 </div>
             </div>
         </div>

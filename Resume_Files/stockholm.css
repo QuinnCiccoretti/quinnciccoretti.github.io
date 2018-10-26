@@ -130,12 +130,13 @@
     padding-left: 0.5rem;
     /*margin-left: 1.2rem;*/
     border-left: 0.15rem solid #bdbdbd;
-    margin-bottom: 3.2rem
+    margin-bottom: 0.5rem
 }
 
 .experience-group .item-title {
     font-size: 2.2rem;
-    margin-bottom: 0.4rem
+    /*margin-bottom: 0.4rem;*/
+    font-weight: bold;
 }
 
 .experience-group .item-title--references-upon {
@@ -145,7 +146,9 @@
 
 .experience-group .item-caption {
     font-size: 1.9rem;
-    margin-bottom: 1.6rem
+    /*margin-bottom: auto;*/
+    font-style: italic;
+    color: #4FC3F7;
 }
 
 .experience-group .item-description {
