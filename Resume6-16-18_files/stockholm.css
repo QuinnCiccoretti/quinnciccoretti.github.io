@@ -69,14 +69,16 @@
     float: left
     font-size: 5em;
 }
-
+/*.experience-group {
+	padding-left: 1%;
+}*/
 
 .experience-group .group-title {
     position: relative;
     font-weight: 500;
     font-size: 2em;
     padding-bottom: 1.8rem;
-    padding-left: 5rem;
+    /*padding-left: 5rem;*/
     page-break-inside: avoid;
     page-break-after: avoid
 }
@@ -84,7 +86,7 @@
 .experience-group .group-title-icon {
     position: absolute;
     top: 0.8rem;
-    left: 0.3rem;
+    left: -4.7rem;
     width: 2.4rem;
     height: 2.4rem;
     background-size: contain;
@@ -125,8 +127,8 @@
 
 .experience-group .experience-item {
     clear: both;
-    padding-left: 3.8rem;
-    margin-left: 1.2rem;
+    padding-left: 0.5rem;
+    /*margin-left: 1.2rem;*/
     border-left: 0.15rem solid #bdbdbd;
     margin-bottom: 3.2rem
 }
@@ -165,7 +167,7 @@
 .experience-group .item-description ol {
     margin: 0.6rem 0;
     list-style-position: outside;
-    padding-left: 5rem
+    /*padding-left: 5rem*/
 }
 
 .experience-group .item-description span {
