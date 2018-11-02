@@ -1,9 +1,25 @@
 /*body{
 	overflow: hidden;
 }*/
+:root {
+  --color1: #00ffcc;
+  --color2: #fff;
+}
 iframe{
 	width: 100%;
 	height:500px;
+}
+.bg-grey {
+    background-color: #f6f6f6;
+}
+.logo {
+    font-size: 200px;
+}
+@media screen and (max-width: 768px) {
+    .col-sm-4 {
+        text-align: center;
+        margin: 25px 0;
+    }
 }
 #stance{
 	position: absolute;
@@ -14,8 +30,8 @@ iframe{
 	left: 80%;
 }
 .jumbotron {
-background-color: #f4511e;
-color: #fff;
+background-color: var(--color1);
+color: var(--color2);
 padding: 100px 25px;
 }
 
@@ -24,18 +40,17 @@ padding: 60px 50px;
 }
 /* Add an orange color to all icons and set the font-size */
 .logo-small {
-	color: #f4511e;
+	color: var(--color1);
 	font-size: 50px;
 }
 
 .logo {
-	color: #f4511e;
+	color: var(--color1);
 	font-size: 200px;
 }
 .navbar {
 	margin-bottom: 0;
-	background-color: #f4511e;
-	/*z-index: 9999;*/
+background-color: var(--color1);	/*z-index: 9999;*/
 	border: 0;
 	font-size: 12px !important;
 	line-height: 1.42857143 !important;
@@ -44,17 +59,17 @@ padding: 60px 50px;
 }
 
 .navbar li a, .navbar .navbar-brand {
-	color: #fff !important;
+	color: var(--color2) !important;
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-	color: #f4511e !important;
-	background-color: #fff !important;
+	color: var(--color2) !important;
+	background-color: #000 !important;
 }
 
 .navbar-default .navbar-toggle {
 	border-color: transparent;
-	color: #fff !important;
+	color: var(--color2) !important;
 }
 #synonymbox{
 	background-color: black;
@@ -77,6 +92,9 @@ padding: 60px 50px;
 	/*width: 400px;*/
 	/*height: 400px;*/
 	margin-bottom: 10px;
-	border: 5px solid #f4511e;;
+	border: 5px solid var(--color1);
 	border-radius:10px;
+}
+.item-caption {
+	color: var(--color1) !important;
 }
