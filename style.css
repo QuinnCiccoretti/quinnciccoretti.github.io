@@ -1,6 +1,6 @@
-/*body{
-	overflow: hidden;
-}*/
+/*
+@author resume.io
+*/
 :root {
   --color1: #00ffcc;
   --color2: #fff;
@@ -96,5 +96,5 @@ background-color: var(--color1);	/*z-index: 9999;*/
 	border-radius:10px;
 }
 .item-caption {
-	color: var(--color1) !important;
+	color: #0000ff !important;
 }
