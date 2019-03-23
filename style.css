@@ -79,20 +79,21 @@ background-color: var(--color1);	/*z-index: 9999;*/
 	border-radius:15px;
 }
 .thumbnail {
+
 	padding: 0 0 15px 0;
-	border: 1px solid white;
+	border: 10px solid white;
 	border-radius: 10px;
 }
 .thumbnail:hover{
-	border: 5px solid white;
-	
+	border: 10px solid var(--color1);
 
 }
 .thumbnail img {
 	/*width: 400px;*/
 	/*height: 400px;*/
+	margin-top: 10px;
 	margin-bottom: 10px;
-	border: 5px solid var(--color1);
+	border: 5px solid white;
 	border-radius:10px;
 }
 .item-caption {
