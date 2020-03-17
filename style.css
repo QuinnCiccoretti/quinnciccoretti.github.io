@@ -98,8 +98,7 @@ background-color: var(--color1);	/*z-index: 9999;*/
 .thumbnail {
 
 	padding: 0 0 15px 0;
-	border: 10px solid white;
-	border-radius: 10px;
+	border: 1px solid gray;
 }
 .thumbnail:hover{
 	border: 10px solid var(--color1);
