@@ -14,39 +14,18 @@
 	<!-- Styling -->
 	<link rel="stylesheet" media="all" href="./Resume_Files/stockholm.css">
     <script src="./Resume_Files/application.js"></script>
-	<script type="text/javascript">
-		window.onload = function(){
-			var synonyms = ["incontrovertible","indisputable","undeniable","authoritative","quintessential","irrefutable","exhaustive","comprehensive", "complete","greatest","original"];
-			//var synonyms = ["authoritative", "test"]
-			var count = 0;
-			var update_synonyms = function(){
-				var new_pick = synonyms[count];
-				$("#synonymbox").fadeOut("slow", function(){
-					$("#synonymbox").html(new_pick);
-				});
-				$("#synonymbox").fadeIn("slow");
-
-				count++;
-				if(count == synonyms.length){
-					count = 0;
-				}
-			}
-			window.setInterval(update_synonyms, 4000);
-
-		}
-	</script>
+	
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <img style = "z-index: -1; padding-top: 6rem;" id="stance" src="./img/stance2.png">
 
 <div style = "position: relative; z-index: -99;" class="jumbotron" id = "maintitle">
-	<h1>Quinn Ciccoretti <br><hr> <small>The <strong id = "synonymbox" > authoritative</strong> source of information on Quinn</small></h1>
+	<h1>Quinn Ciccoretti <br><hr></h1>
 	
 </div>
-<style>
 
-</style>
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -179,13 +158,10 @@
  
 </div>
 
-<div class="container-fluid text-center bg-grey" id = "projects">
-	<h2>PROJECTS</h2>
+<div class="text-center bg-grey" id="projcontainer">
+	<h2 style="padding-top: 15px;">PROJECTS</h2>
 	<hr>
-	<div class="row justify-content-around">
-		<div class="col-sm-1">
-		</div>
-		<div class="col-sm-4">
+	<div class="col-sm-4 project" id = "physvr">
 			<a href ="https://github.com/QuinnCiccoretti/physvr">
 				<div class="thumbnail">
 					<img class = "img-thumbnail" src="./img/research-icon.png" alt="ResearchProject">
@@ -193,9 +169,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-sm-2">
-		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-4 project" id="sicko">
 			<a href ="https://devpost.com/software/sicko-code/">
 				<div class="thumbnail">
 					<img class = "img-thumbnail" src="./img/sickocode.png" alt="SickoCode">
@@ -203,14 +177,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-sm-1">
-		</div>
-		
-	</div>
-	<div class="row justify-content-around">
-		<div class="col-sm-1">
-		</div>
-		<div class="col-sm-4" >
+		<div class="col-sm-4 project" id ="stacks">
 			<a href ="https://github.com/QuinnCiccoretti/stacksonstacks">
 				<div class="thumbnail">
 					<img class = "img-thumbnail" src="./img/stacksonstacks.png" alt="stacksonstacks logo">
@@ -218,9 +185,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-sm-2">
-		</div>
-		<div class="col-sm-4" >
+		<div class="col-sm-4 project" id = "imm" >
 			<a href ="https://immersiveatuva.github.io/">
 				<div class="thumbnail">
 					<img class = "img-thumbnail" src="./img/immersive.png" alt="immersive site logo">
@@ -228,9 +193,6 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-sm-1">
-		</div>
-	</div>
 </div>
 <div class="container-fluid bg-white" >
   
@@ -243,5 +205,6 @@
      
   </div>
 </div>
+<script src="./ts/dist/bundle.js"></script>
 </body>
 </html>
