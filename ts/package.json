@@ -1,0 +1,25 @@
+{
+  "name": "cubelink",
+  "version": "0.0.0",
+  "description": "css3d thing for making a cool cube",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuinnCiccoretti/quinnciccoretti.github.io.git"
+  },
+  "keywords": [
+    "threejs"
+  ],
+  "author": "quinnciccoretti",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^13.9.1"
+  },
+  "dependencies": {
+    "three": "^0.114.0"
+  }
+}
