@@ -1,12 +1,12 @@
 import {PerspectiveCamera, Scene, Group, Color} from 'three';
 
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 var camera:PerspectiveCamera;
 var scene:Scene;
 var renderer: CSS3DRenderer;
-var controls: TrackballControls;
+var controls: OrbitControls;
 
 class Element extends CSS3DObject {
 	constructor( div:HTMLElement|null, x:number, y:number, z:number, ry:number ) {
@@ -54,9 +54,10 @@ function init() {
 	scene.add( group );
 	
 
-	controls = new TrackballControls( camera, renderer.domElement );
-	controls.noZoom = true;
-	controls.rotateSpeed = 4;
+	controls = new OrbitControls( camera, renderer.domElement );
+	controls.enableZoom = false;
+	controls.enablePan = false;
+	controls.autoRotate = true;
 
 	window.addEventListener( 'resize', onWindowResize, false );
 
@@ -79,10 +80,11 @@ function init() {
 }
 
 function onWindowResize() {
-
+	
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.domElement.style.width = "100%";
 
 }
 
