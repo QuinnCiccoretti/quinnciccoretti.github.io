@@ -14,34 +14,14 @@
 	<!-- Styling -->
 	<link rel="stylesheet" media="all" href="./Resume_Files/stockholm.css">
     <script src="./Resume_Files/application.js"></script>
-	<script type="text/javascript">
-		window.onload = function(){
-			var synonyms = ["incontrovertible","indisputable","undeniable","authoritative","quintessential","irrefutable","exhaustive","comprehensive", "complete","greatest","original"];
-			//var synonyms = ["authoritative", "test"]
-			var count = 0;
-			var update_synonyms = function(){
-				var new_pick = synonyms[count];
-				$("#synonymbox").fadeOut("slow", function(){
-					$("#synonymbox").html(new_pick);
-				});
-				$("#synonymbox").fadeIn("slow");
-
-				count++;
-				if(count == synonyms.length){
-					count = 0;
-				}
-			}
-			window.setInterval(update_synonyms, 4000);
-
-		}
-	</script>
+	
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <img style = "z-index: -1; padding-top: 6rem;" id="stance" src="./img/stance2.png">
 
 <div style = "position: relative; z-index: -99;" class="jumbotron" id = "maintitle">
-	<h1>Quinn Ciccoretti <br><hr> <small>The <strong id = "synonymbox" > authoritative</strong> source of information on Quinn</small></h1>
+	<h1>Quinn Ciccoretti <br><hr></h1>
 	
 </div>
 
@@ -214,7 +194,7 @@
 			</a>
 		</div>
 	<div class="row">
-		<div class="col-xl-12" id = "container"></div>
+		<div  id = "container"></div>
 	</div>
 </div>
 <div class="container-fluid bg-white" >

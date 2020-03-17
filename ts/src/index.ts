@@ -59,8 +59,6 @@ function init() {
 	controls.enablePan = false;
 	controls.autoRotate = true;
 
-	window.addEventListener( 'resize', onWindowResize, false );
-
 	// Block iframe events when dragging camera
 
 	// var blocker = document.getElementById( 'blocker' );
@@ -76,15 +74,6 @@ function init() {
 	// 	blocker.style.display = 'none';
 
 	// } );
-
-}
-
-function onWindowResize() {
-	
-	// camera.aspect = window.innerWidth / window.innerHeight;
-	// camera.updateProjectionMatrix();
-	// renderer.setSize( window.innerWidth, window.innerHeight );
-	// renderer.domElement.style.width = "100%";
 
 }
 
