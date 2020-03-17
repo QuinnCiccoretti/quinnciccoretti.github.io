@@ -29,7 +29,7 @@ animate();
 
 function init() {
 
-	var container = document.getElementById( 'container' );
+	var container = document.getElementById( 'projcontainer' );
 
 	camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
 	camera.position.set( 500, 350, 750 );
@@ -40,6 +40,7 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	(<HTMLElement>container).appendChild( renderer.domElement );
 	renderer.domElement.style.width = "100%";
+
 
 	var group = new Group();
 	var p1 = document.getElementById("imm");
