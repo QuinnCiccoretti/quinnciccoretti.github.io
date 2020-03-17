@@ -13,8 +13,8 @@ class Element extends CSS3DObject {
 		if(!div){
 			div = document.createElement('div');
 		}
-		div.style.width = '700px';
-		div.style.height = '700px';
+		div.style.width = '300px';
+		div.style.height = '300px';
 		// div.style.backgroundColor = "#ff0000";
 
 		super(div);
@@ -45,7 +45,7 @@ function init() {
 	var p2 = document.getElementById("sicko");
 	var p3 = document.getElementById("physvr");
 	var p4 = document.getElementById("stacks");
-	var separation = 350;
+	var separation = 150;
 	group.add( new Element( p1, 0, 0, separation, 0 ) );
 	group.add( new Element( p2, separation, 0, 0, Math.PI / 2 ) );
 	group.add( new Element( p3, 0, 0, - separation, Math.PI ) );
@@ -54,6 +54,7 @@ function init() {
 	
 
 	controls = new TrackballControls( camera, renderer.domElement );
+	controls.noZoom = true;
 	controls.rotateSpeed = 4;
 
 	window.addEventListener( 'resize', onWindowResize, false );
