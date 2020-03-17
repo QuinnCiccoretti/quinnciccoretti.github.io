@@ -39,6 +39,7 @@ function init() {
 	renderer = new CSS3DRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	(<HTMLElement>container).appendChild( renderer.domElement );
+	renderer.domElement.style.width = "100%";
 
 	var group = new Group();
 	var p1 = document.getElementById("imm");
