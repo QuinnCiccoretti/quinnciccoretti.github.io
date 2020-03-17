@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,12 @@
   "author": "quinnciccoretti",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^13.9.1"
+    "@types/node": "^13.9.1",
+    "file-loader": "^5.1.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "three": "^0.114.0"
