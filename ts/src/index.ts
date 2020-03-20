@@ -32,15 +32,15 @@ function init() {
 	var container = document.getElementById( 'projcontainer' );
 
 	camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-	camera.position.set( 500, 350, 750 );
+	camera.position.set( 500, 350, 750 ).multiplyScalar(0.7);
 
 	scene = new Scene();
 	
 	renderer = new CSS3DRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth, window.innerHeight / 1.55);
 	(<HTMLElement>container).appendChild( renderer.domElement );
 	renderer.domElement.style.width = "100%";
-	renderer.domElement.style.height = "650px";
+	// renderer.domElement.style.height = "100%";
 
 	var group = new Group();
 	var p1 = document.getElementById("imm");
@@ -48,12 +48,11 @@ function init() {
 	var p3 = document.getElementById("physvr");
 	var p4 = document.getElementById("stacks");
 	const separation = 150;
-	const height = 200;
+	const height = 50;
 	group.add( new Element( p1, 0, height, separation, 0 ) );
 	group.add( new Element( p2, separation, height, 0, Math.PI / 2 ) );
 	group.add( new Element( p3, 0, height, - separation, Math.PI ) );
 	group.add( new Element( p4, - separation, height, 0, - Math.PI / 2 ) );
-	group.position.set(0, 0, -10);
 	scene.add( group );
 	
 
