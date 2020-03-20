@@ -40,25 +40,31 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	(<HTMLElement>container).appendChild( renderer.domElement );
 	renderer.domElement.style.width = "100%";
-
+	renderer.domElement.style.height = "650px";
 
 	var group = new Group();
 	var p1 = document.getElementById("imm");
 	var p2 = document.getElementById("sicko");
 	var p3 = document.getElementById("physvr");
 	var p4 = document.getElementById("stacks");
-	var separation = 150;
-	group.add( new Element( p1, 0, 0, separation, 0 ) );
-	group.add( new Element( p2, separation, 0, 0, Math.PI / 2 ) );
-	group.add( new Element( p3, 0, 0, - separation, Math.PI ) );
-	group.add( new Element( p4, - separation, 0, 0, - Math.PI / 2 ) );
+	const separation = 150;
+	const height = 200;
+	group.add( new Element( p1, 0, height, separation, 0 ) );
+	group.add( new Element( p2, separation, height, 0, Math.PI / 2 ) );
+	group.add( new Element( p3, 0, height, - separation, Math.PI ) );
+	group.add( new Element( p4, - separation, height, 0, - Math.PI / 2 ) );
+	group.position.set(0, 0, -10);
 	scene.add( group );
 	
 
-	controls = new OrbitControls( camera, renderer.domElement );
+	controls = new OrbitControls( camera, renderer.domElement);
 	controls.enableZoom = false;
 	controls.enablePan = false;
 	controls.autoRotate = true;
+	controls.enableDamping = true;
+	//lock the vertical rotation
+	controls.maxPolarAngle = 1.2;
+	controls.minPolarAngle = 1.2;
 
 	// Block iframe events when dragging camera
 
