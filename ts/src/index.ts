@@ -62,8 +62,8 @@ function init() {
 	controls.autoRotate = true;
 	controls.enableDamping = true;
 	//lock the vertical rotation
-	controls.maxPolarAngle = 1.2;
-	controls.minPolarAngle = 1.2;
+	controls.maxPolarAngle = 1.4;
+	controls.minPolarAngle = 1.0;
 
 	// Block iframe events when dragging camera
 
