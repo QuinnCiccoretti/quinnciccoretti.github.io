@@ -41,6 +41,7 @@ function init(){
 	igRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
 	(<HTMLElement>igcontainer).appendChild( igRenderer.domElement );
 	igRenderer.domElement.style.width = "100%";
+	initIgScene();
 
 	var projcontainer = document.getElementById( 'projcontainer' );
 	projectRenderer = new CSS3DRenderer();
@@ -49,7 +50,7 @@ function init(){
 	projectRenderer.domElement.style.width = "100%";
 
 	initProjectScene();
-	initIgScene();
+	
 }
 function initIgScene(){
 	// [id of post, is a video]
@@ -57,7 +58,20 @@ function initIgScene(){
 		["B8nKBHnHqvz", true],
 		["B2pyY0enhh6", false],
 		["B3QDxpGH5Bv", true],
-		["B1RLa30H_v7", false]
+		["B1RLa30H_v7", false],
+		["B0U0Z--nX0z", true],
+		["BxSmkgeAcY4", true],
+		["BwcJzeNhd6t", false],
+		["BwNwTqThu9u", true],
+		["BvP8V2XBN0a", true],
+		["Bu2OJqFBiGP", false],
+		["BteKLDehfGZ", false],
+		["BsFVfqNBcn2", true],
+		["BqEWG5GBXDB", false],
+		["BpI03Fgjr5q", false],
+		["Bo3VqCbDCMW", false],
+		["Bnb2fY4jshG", true],
+		["BnNWeC3DuAv", true]
 	];
 	for(var post of posts){
 		if(post[1]){
@@ -68,6 +82,9 @@ function initIgScene(){
 			parseEntry(post).then((child)=>{
 				document.body.appendChild(child);
 				setTimeout(function(){
+					//call a weirdly declared separate script
+					//to appropriately embed videos
+					//forgive me for my sins
 					(<any>instgrm).Embeds.process();
 				}, 1000);
 				
@@ -75,9 +92,7 @@ function initIgScene(){
 			});
 		}
 	}
-	//call a weirdly declared separate script
-	//to appropriately embed videos
-	//forgive me for my sins
+	
 
 
 	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
@@ -133,6 +148,6 @@ function animate() {
 	projectRenderer.render( projectScene, projectCamera );
 
 	igControls.update();
-	igRenderer.render( projectScene, projectCamera );
+	igRenderer.render( igScene, igCamera );
 
 }
