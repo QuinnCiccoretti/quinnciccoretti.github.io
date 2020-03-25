@@ -77,21 +77,18 @@ var imgurl2 = "/media/?size=m";
 // images need no call to embeds
 function parseEntry(post) {
     return __awaiter(this, void 0, void 0, function () {
-        var embedResponseText, img, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var embedResponseText, img;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
                     if (!post[1]) return [3 /*break*/, 2];
                     return [4 /*yield*/, requestHTTP(vidurl + post[0])];
                 case 1:
-                    embedResponseText = _b.sent();
+                    embedResponseText = _a.sent();
                     return [2 /*return*/, processIgEmbedResponse(embedResponseText)];
                 case 2:
                     img = document.createElement('img');
-                    _a = img;
-                    return [4 /*yield*/, requestHTTP(imgurl1 + post[0] + imgurl2)];
-                case 3:
-                    _a.src = _b.sent();
+                    img.src = imgurl1 + post[0] + imgurl2;
                     return [2 /*return*/, img];
             }
         });

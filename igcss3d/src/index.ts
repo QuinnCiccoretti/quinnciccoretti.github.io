@@ -42,7 +42,7 @@ export async function parseEntry(post:[string, boolean]):Promise<ChildNode>{
 	}
 	else{	//if it is an image
 		var img = document.createElement('img');
-		img.src = await requestHTTP(imgurl1 + post[0] + imgurl2);
+		img.src = imgurl1 + post[0] + imgurl2;
 		return img;
 	}
 }

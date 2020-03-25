@@ -36,39 +36,64 @@ animate();
 
 function init(){
 
-	var container = document.getElementById( 'igcontainer' );
-	projectRenderer = new CSS3DRenderer();
-	projectRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
-	(<HTMLElement>container).appendChild( projectRenderer.domElement );
-	projectRenderer.domElement.style.width = "100%";
+	var igcontainer = document.getElementById( 'igcontainer' );
+	igRenderer = new CSS3DRenderer();
+	igRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
+	(<HTMLElement>igcontainer).appendChild( igRenderer.domElement );
+	igRenderer.domElement.style.width = "100%";
 
-	var container = document.getElementById( 'projcontainer' );
+	var projcontainer = document.getElementById( 'projcontainer' );
 	projectRenderer = new CSS3DRenderer();
 	projectRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
-	(<HTMLElement>container).appendChild( projectRenderer.domElement );
+	(<HTMLElement>projcontainer).appendChild( projectRenderer.domElement );
 	projectRenderer.domElement.style.width = "100%";
 
 	initProjectScene();
+	initIgScene();
 }
 function initIgScene(){
-	var posts = [
-		["B8nKBHnHqvz", ],
+	// [id of post, is a video]
+	var posts : [string, boolean][] = [
+		["B8nKBHnHqvz", true],
+		["B2pyY0enhh6", false],
+		["B3QDxpGH5Bv", true],
+		["B1RLa30H_v7", false]
 	];
-	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-	projectCamera.position.set( 500, 350, 750 ).multiplyScalar(0.7);
-	projectScene = new Scene();
+	for(var post of posts){
+		if(post[1]){
+			parseEntry(post).then((child)=>{
+				document.body.appendChild(child);
+				console.log("yippe");
+			});
+		}else{
+			parseEntry(post).then((child)=>{
+				document.body.appendChild(child);
+				(<any>instgrm).Embeds.process();
+				console.log("yahoo");
+			});
+		}
+	}
+	//call a weirdly declared separate script
+	//to appropriately embed videos
+	//forgive me for my sins
+	(<any>instgrm).Embeds.process();
+	(<any>instgrm).Embeds.process();
+
+	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
+	igCamera.position.set( 500, 350, 750 ).multiplyScalar(0.7);
+	igScene = new Scene();
 
 	
 	
 
-	projectControls = new OrbitControls( projectCamera, projectRenderer.domElement);
-	projectControls.enableZoom = false;
-	projectControls.enablePan = false;
-	projectControls.autoRotate = true;
-	projectControls.enableDamping = true;
+	igControls = new OrbitControls( igCamera, igRenderer.domElement);
+	igControls.enableZoom = false;
+	igControls.enablePan = false;
+	igControls.autoRotate = true;
+	igControls.enableDamping = true;
 	//lock the vertical rotation
-	projectControls.maxPolarAngle = 1.4;
-	projectControls.minPolarAngle = 1.0;
+	igControls.maxPolarAngle = 1.4;
+	igControls.minPolarAngle = 1.0;
 }
 function initProjectScene() {
 	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );

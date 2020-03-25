@@ -1,6 +1,6 @@
 {
   "name": "igcss3d",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "css3d thing for making a instagram embeds look nice",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
