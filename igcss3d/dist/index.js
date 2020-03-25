@@ -69,7 +69,7 @@ function processIgEmbedResponse(response) {
     el.innerHTML = parsed_resp.html;
     return el.firstChild;
 }
-var vidurl = "http://api.instagram.com/oembed/?omitscript=true&url=http://www.instagram.com/p/";
+var vidurl = "http://api.instagram.com/oembed/?maxwidth=350&omitscript=true&url=http://www.instagram.com/p/";
 var imgurl1 = "https://instagram.com/p/";
 var imgurl2 = "/media/?size=m";
 // though this returns the right element, you must call 

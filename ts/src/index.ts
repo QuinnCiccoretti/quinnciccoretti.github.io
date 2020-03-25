@@ -63,21 +63,22 @@ function initIgScene(){
 		if(post[1]){
 			parseEntry(post).then((child)=>{
 				document.body.appendChild(child);
-				console.log("yippe");
 			});
 		}else{
 			parseEntry(post).then((child)=>{
 				document.body.appendChild(child);
-				(<any>instgrm).Embeds.process();
-				console.log("yahoo");
+				setTimeout(function(){
+					(<any>instgrm).Embeds.process();
+				}, 1000);
+				
+				
 			});
 		}
 	}
 	//call a weirdly declared separate script
 	//to appropriately embed videos
 	//forgive me for my sins
-	(<any>instgrm).Embeds.process();
-	(<any>instgrm).Embeds.process();
+
 
 	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
 	igCamera.position.set( 500, 350, 750 ).multiplyScalar(0.7);

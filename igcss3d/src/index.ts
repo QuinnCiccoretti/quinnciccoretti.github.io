@@ -27,7 +27,7 @@ function processIgEmbedResponse(response:string):ChildNode{
 	return <ChildNode>el.firstChild;
 	
 }
-const vidurl= "http://api.instagram.com/oembed/?omitscript=true&url=http://www.instagram.com/p/";
+const vidurl= "http://api.instagram.com/oembed/?maxwidth=350&omitscript=true&url=http://www.instagram.com/p/";
 
 const imgurl1 = "https://instagram.com/p/";
 const imgurl2 = "/media/?size=m";
