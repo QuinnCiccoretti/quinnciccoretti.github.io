@@ -73,14 +73,26 @@ function initIgScene(){
 		["Bnb2fY4jshG", true],
 		["BnNWeC3DuAv", true]
 	];
-	for(var post of posts){
+	var n = posts.length;
+	var dtheta = 2 * Math.PI / (n+1);
+	var group = new Group();
+
+	projectScene.add( group );
+	for(var i = 0; i < n; i++){
+		var post = posts[i];
 		if(post[1]){
-			parseEntry(post).then((child)=>{
-				document.body.appendChild(child);
+			parseEntry(post).then((element)=>{
+				console.log("I:"+i);
+				var x = Math.cos(i*dtheta);
+				var z = Math.sin(i*dtheta);
+				group.add( new Element( element, 50, x, z, 0 ) );
 			});
 		}else{
-			parseEntry(post).then((child)=>{
-				document.body.appendChild(child);
+			parseEntry(post).then((element)=>{
+				console.log("I:"+i);
+				var x = Math.cos(i*dtheta);
+				var z = Math.sin(i*dtheta);
+				group.add( new Element( element, 50, x, z, 0 ) );
 				setTimeout(function(){
 					//call a weirdly declared separate script
 					//to appropriately embed videos

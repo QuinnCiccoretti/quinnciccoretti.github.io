@@ -19,12 +19,12 @@ async function requestHTTP(url:string):Promise<string>{
 	});
 };
 
-function processIgEmbedResponse(response:string):ChildNode{
+function processIgEmbedResponse(response:string):HTMLElement{
 	var parsed_resp = JSON.parse(response);
 	console.log(parsed_resp);
 	var el = document.createElement('div');
 	el.innerHTML =  parsed_resp.html;
-	return <ChildNode>el.firstChild;
+	return <HTMLElement>el.firstChild;
 	
 }
 const vidurl= "http://api.instagram.com/oembed/?maxwidth=350&omitscript=true&url=http://www.instagram.com/p/";
@@ -34,7 +34,7 @@ const imgurl2 = "/media/?size=m";
 // though this returns the right element, you must call 
 // instgrm.Embeds.process(); elsewhere for videos to render!
 // images need no call to embeds
-export async function parseEntry(post:[string, boolean]):Promise<ChildNode>{
+export async function parseEntry(post:[string, boolean]):Promise<HTMLElement>{
 	if(post[1]){	//if it is a video
 		//use the oembed api
 		var embedResponseText = await requestHTTP(vidurl + post[0]);

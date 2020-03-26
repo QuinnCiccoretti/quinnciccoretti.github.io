@@ -25,7 +25,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "igcss3d": "0.0.5",
+    "igcss3d": "0.0.6",
     "three": "^0.114.0"
   }
 }
