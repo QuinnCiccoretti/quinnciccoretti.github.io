@@ -1,6 +1,7 @@
 import {PerspectiveCamera, Scene, Group, Color} from 'three';
 import {parseEntry} from 'igcss3d';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls'
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 var projectCamera : PerspectiveCamera;
@@ -13,7 +14,8 @@ var projectRenderer: CSS3DRenderer;
 var igRenderer: CSS3DRenderer;
 
 var projectControls: OrbitControls;
-var igControls: OrbitControls;
+var igControls: TrackballControls;
+
 
 class Element extends CSS3DObject {
 	constructor( div:HTMLElement|null, x:number, y:number, z:number, ry:number ) {
@@ -32,7 +34,7 @@ class Element extends CSS3DObject {
 };
 
 init();
-animate();
+
 
 function init(){
 
@@ -41,7 +43,7 @@ function init(){
 	igRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
 	(<HTMLElement>igcontainer).appendChild( igRenderer.domElement );
 	igRenderer.domElement.style.width = "100%";
-	initIgScene();
+	initIgScene().then(function(){animate();})
 
 	var projcontainer = document.getElementById( 'projcontainer' );
 	projectRenderer = new CSS3DRenderer();
@@ -52,7 +54,13 @@ function init(){
 	initProjectScene();
 	
 }
-function initIgScene(){
+
+async function initIgScene(){
+	igScene = new Scene();
+	var igGroup = new Group();
+	igScene.add( igGroup );
+	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
+	igCamera.position.set(100,100,100);
 	// [id of post, is a video]
 	var posts : [string, boolean][] = [
 		["B8nKBHnHqvz", true],
@@ -74,54 +82,35 @@ function initIgScene(){
 		["BnNWeC3DuAv", true]
 	];
 	var n = posts.length;
-	var dtheta = 2 * Math.PI / (n+1);
-	var group = new Group();
+	var dtheta = 2.0 * Math.PI / (n+1);
+	console.log(dtheta)
 
-	projectScene.add( group );
+	function addElem(element:HTMLElement, i:number){
+		console.log("I:"+i);
+		var r = 1000;
+		var x = r*Math.cos(i*dtheta);
+		var z = r*Math.sin(i*dtheta);
+		console.log(x,z);
+		igGroup.add( new Element( element, x,0, z, 0 ) );
+	}
 	for(var i = 0; i < n; i++){
 		var post = posts[i];
+		var elem = await parseEntry(post);
+		addElem(elem, i);
 		if(post[1]){
-			parseEntry(post).then((element)=>{
-				console.log("I:"+i);
-				var x = Math.cos(i*dtheta);
-				var z = Math.sin(i*dtheta);
-				group.add( new Element( element, 50, x, z, 0 ) );
-			});
-		}else{
-			parseEntry(post).then((element)=>{
-				console.log("I:"+i);
-				var x = Math.cos(i*dtheta);
-				var z = Math.sin(i*dtheta);
-				group.add( new Element( element, 50, x, z, 0 ) );
+				(<any>instgrm).Embeds.process();
 				setTimeout(function(){
 					//call a weirdly declared separate script
 					//to appropriately embed videos
 					//forgive me for my sins
 					(<any>instgrm).Embeds.process();
 				}, 1000);
-				
-				
-			});
 		}
 	}
 	
 
-
-	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-	igCamera.position.set( 500, 350, 750 ).multiplyScalar(0.7);
-	igScene = new Scene();
-
+	igControls = new TrackballControls( igCamera, igRenderer.domElement);
 	
-	
-
-	igControls = new OrbitControls( igCamera, igRenderer.domElement);
-	igControls.enableZoom = false;
-	igControls.enablePan = false;
-	igControls.autoRotate = true;
-	igControls.enableDamping = true;
-	//lock the vertical rotation
-	igControls.maxPolarAngle = 1.4;
-	igControls.minPolarAngle = 1.0;
 }
 function initProjectScene() {
 	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
