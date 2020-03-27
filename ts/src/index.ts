@@ -13,7 +13,7 @@ var projectRenderer: CSS3DRenderer;
 var igRenderer: CSS3DRenderer;
 
 var projectControls: OrbitControls;
-var igControls: TrackballControls;
+var igControls: OrbitControls;
 
 
 class Element extends CSS3DObject {
@@ -56,9 +56,9 @@ function init(){
 function initIgScene(){
 	igScene = new Scene();
 	var igGroup = new Group();
+	igGroup.position.set(0,0,0);
 	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-	igCamera.position.set( 0, 0, 3000 ).multiplyScalar(0.7);
-	
+	igCamera.position.set( 100, 150, 750 ).multiplyScalar(0.7);
 	var container = document.getElementById("igcontainer");
 	if(!container)
 		return;
@@ -66,26 +66,33 @@ function initIgScene(){
 	var n = children.length;
 	var count = 0;
 	var dtheta = ( 2.0 * Math.PI ) / n;
-	var r = 1000;
-
+	var origin = new Vector3();
+	var ogdiv = document.createElement("div");
+	ogdiv.innerHTML = "I am the origin";
+	igGroup.add(new Element(ogdiv, 0,0,0,0));
 	for(var child of <any>children){
-		var vector = new Vector3();
-		var phi = Math.acos( - 1 + ( 2 * count ) / (n/2) );
-		var theta = Math.sqrt( count * Math.PI ) * phi;
-		var elem = new Element( child, 0, 0, 0, 0 );
-		elem.position.setFromSphericalCoords( 800, phi, theta );
-		vector.copy( elem.position ).multiplyScalar( 2 );
-		elem.lookAt( vector );
+
+		var r = 500;
+		var theta = count*dtheta;
+		var x = r*Math.cos(theta);
+		var z = r*Math.sin(theta);
+		console.log(x,z);
+		var elem = new Element( child, x, 0, z, 0 );
+		elem.lookAt( origin );
 		igGroup.add( elem );
 		count++;
 	}
 	igScene.add( igGroup );
-
 	
 	(<HTMLElement>container).appendChild( igRenderer.domElement );
-	igControls = new TrackballControls( igCamera, igRenderer.domElement);
-	igControls.minDistance = 500;
-	igControls.maxDistance = 6000;
+	igControls = new OrbitControls( igCamera, igRenderer.domElement);
+	igControls.enableZoom = false;
+	igControls.enablePan = false;
+	igControls.autoRotate = true;
+	igControls.enableDamping = true;
+	//lock the vertical rotation
+	igControls.maxPolarAngle = 1.4;
+	igControls.minPolarAngle = 1.0;
 }
 function initProjectScene() {
 	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
