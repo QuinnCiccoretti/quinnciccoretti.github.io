@@ -1,5 +1,4 @@
-import {PerspectiveCamera, Scene, Group, Color} from 'three';
-import {parseEntry} from 'igcss3d';
+import {PerspectiveCamera, Scene, Group, Color, Vector3} from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls'
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
@@ -37,13 +36,11 @@ init();
 
 
 function init(){
-
 	var igcontainer = document.getElementById( 'igcontainer' );
 	igRenderer = new CSS3DRenderer();
 	igRenderer.setSize( window.innerWidth, window.innerHeight / 1.55);
-	(<HTMLElement>igcontainer).appendChild( igRenderer.domElement );
 	igRenderer.domElement.style.width = "100%";
-	initIgScene().then(function(){animate();})
+	initIgScene();
 
 	var projcontainer = document.getElementById( 'projcontainer' );
 	projectRenderer = new CSS3DRenderer();
@@ -52,76 +49,43 @@ function init(){
 	projectRenderer.domElement.style.width = "100%";
 
 	initProjectScene();
+	animate();
 	
 }
-var igGroup:Group;
-async function initIgScene(){
+
+function initIgScene(){
 	igScene = new Scene();
-	igGroup = new Group();
-	igScene.add( igGroup );
+	var igGroup = new Group();
 	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-	igCamera.position.set(100,100,100);
-	// [id of post, is a video]
-	var posts : [string, boolean][] = [
-		["B8nKBHnHqvz", true],
-		["B2pyY0enhh6", false],
-		["B3QDxpGH5Bv", true],
-		["B1RLa30H_v7", false],
-		["B0U0Z--nX0z", true],
-		["BxSmkgeAcY4", true],
-		["BwcJzeNhd6t", false],
-		["BwNwTqThu9u", true],
-		["BvP8V2XBN0a", true],
-		["Bu2OJqFBiGP", false],
-		["BteKLDehfGZ", false],
-		["BsFVfqNBcn2", true],
-		["BqEWG5GBXDB", false],
-		["BpI03Fgjr5q", false],
-		["Bo3VqCbDCMW", false],
-		["Bnb2fY4jshG", true],
-		["BnNWeC3DuAv", true]
-	];
-	var n = posts.length;
+	igCamera.position.set( 0, 0, 3000 ).multiplyScalar(0.7);
 	
-	for(var i = 0; i < n; i++){
-		var post = posts[i];
-		var elem = await parseEntry(post);
-		elem.setAttribute("id", post[0]);
-		(<HTMLElement>document.getElementById("tempcontainer")).appendChild(elem);
-		// addElem(elem, i);
-		if(post[1]){
-				
-		}
-	}
-	if((<any>instgrm).Embeds.process){
-		(<any>instgrm).Embeds.process();
-		addAll();
-				
-	}else{
-		setTimeout(function(){
-					//call a weirdly declared separate script
-					//to appropriately embed videos
-					//forgive me for my sins
-					(<any>instgrm).Embeds.process();
-					addAll();
-				}, 1000);
-	}
-	
-
-
-	igControls = new TrackballControls( igCamera, igRenderer.domElement);
-	
-}
-function addAll(){
-	var container = document.getElementById("tempcontainer");
+	var container = document.getElementById("igcontainer");
 	if(!container)
 		return;
 	var children = container.children;
+	var n = children.length;
 	var count = 0;
+	var dtheta = ( 2.0 * Math.PI ) / n;
+	var r = 1000;
+
 	for(var child of <any>children){
-		igGroup.add( new Element( child, count*350, 0, 0, 0 ) );
+		var vector = new Vector3();
+		var phi = Math.acos( - 1 + ( 2 * count ) / (n/2) );
+		var theta = Math.sqrt( count * Math.PI ) * phi;
+		var elem = new Element( child, 0, 0, 0, 0 );
+		elem.position.setFromSphericalCoords( 800, phi, theta );
+		vector.copy( elem.position ).multiplyScalar( 2 );
+		elem.lookAt( vector );
+		igGroup.add( elem );
 		count++;
 	}
+	igScene.add( igGroup );
+
+	
+	(<HTMLElement>container).appendChild( igRenderer.domElement );
+	igControls = new TrackballControls( igCamera, igRenderer.domElement);
+	igControls.minDistance = 500;
+	igControls.maxDistance = 6000;
 }
 function initProjectScene() {
 	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
