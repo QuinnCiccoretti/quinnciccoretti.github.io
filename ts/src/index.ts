@@ -54,10 +54,10 @@ function init(){
 	initProjectScene();
 	
 }
-
+var igGroup:Group;
 async function initIgScene(){
 	igScene = new Scene();
-	var igGroup = new Group();
+	igGroup = new Group();
 	igScene.add( igGroup );
 	igCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
 	igCamera.position.set(100,100,100);
@@ -82,35 +82,46 @@ async function initIgScene(){
 		["BnNWeC3DuAv", true]
 	];
 	var n = posts.length;
-	var dtheta = 2.0 * Math.PI / (n+1);
-	console.log(dtheta)
-
-	function addElem(element:HTMLElement, i:number){
-		console.log("I:"+i);
-		var r = 1000;
-		var x = r*Math.cos(i*dtheta);
-		var z = r*Math.sin(i*dtheta);
-		console.log(x,z);
-		igGroup.add( new Element( element, x,0, z, 0 ) );
-	}
+	
 	for(var i = 0; i < n; i++){
 		var post = posts[i];
 		var elem = await parseEntry(post);
-		addElem(elem, i);
+		elem.setAttribute("id", post[0]);
+		(<HTMLElement>document.getElementById("tempcontainer")).appendChild(elem);
+		// addElem(elem, i);
 		if(post[1]){
-				(<any>instgrm).Embeds.process();
-				setTimeout(function(){
+				
+		}
+	}
+	if((<any>instgrm).Embeds.process){
+		(<any>instgrm).Embeds.process();
+		addAll();
+				
+	}else{
+		setTimeout(function(){
 					//call a weirdly declared separate script
 					//to appropriately embed videos
 					//forgive me for my sins
 					(<any>instgrm).Embeds.process();
+					addAll();
 				}, 1000);
-		}
 	}
 	
 
+
 	igControls = new TrackballControls( igCamera, igRenderer.domElement);
 	
+}
+function addAll(){
+	var container = document.getElementById("tempcontainer");
+	if(!container)
+		return;
+	var children = container.children;
+	var count = 0;
+	for(var child of <any>children){
+		igGroup.add( new Element( child, count*350, 0, 0, 0 ) );
+		count++;
+	}
 }
 function initProjectScene() {
 	projectCamera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
