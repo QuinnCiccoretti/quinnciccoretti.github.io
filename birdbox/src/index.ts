@@ -1,5 +1,7 @@
-import * as THREE from 'three';
-
+import {BufferGeometry, BufferAttribute} from 'three';
+import {Color, Scene, PerspectiveCamera, Fog} from 'three';
+import {WebGLRenderer, Vector3, RepeatWrapping} from 'three';
+import {ShaderMaterial, Mesh, DoubleSide, Texture} from 'three';
 import { GPUComputationRenderer } from 'three/examples/jsm/misc/GPUComputationRenderer.js';
 
 /* TEXTURE WIDTH FOR SIMULATION */
@@ -8,7 +10,7 @@ var WIDTH = 32;
 var BIRDS = WIDTH * WIDTH;
 
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
-class BirdGeometry extends THREE.BufferGeometry {
+class BirdGeometry extends BufferGeometry {
 	constructor(){
 		super();
 		var triangles = BIRDS * 3;
@@ -67,7 +69,7 @@ class BirdGeometry extends THREE.BufferGeometry {
 		var x = ( i % WIDTH ) / WIDTH;
 		var y = ~ ~ ( i / WIDTH ) / WIDTH;
 
-		var c = new THREE.Color(
+		var c = new Color(
 			0x444444 +
 			~ ~ ( v / 9 ) / BIRDS * 0x666666
 		);
@@ -84,10 +86,10 @@ class BirdGeometry extends THREE.BufferGeometry {
 	}
 
 	this.scale( 0.2, 0.2, 0.2 );
-	var vertices = new THREE.BufferAttribute( vert_arr, 3 );
-	var birdColors = new THREE.BufferAttribute(birdColors_arr , 3 );
-	var references = new THREE.BufferAttribute( ref_arr, 2 );
-	var birdVertex = new THREE.BufferAttribute(birdVert_arr , 1 );
+	var vertices = new BufferAttribute( vert_arr, 3 );
+	var birdColors = new BufferAttribute(birdColors_arr , 3 );
+	var references = new BufferAttribute( ref_arr, 2 );
+	var birdVertex = new BufferAttribute(birdVert_arr , 1 );
 	this.setAttribute( 'position', vertices );
 	this.setAttribute( 'birdColor', birdColors );
 	this.setAttribute( 'reference', references );
@@ -98,8 +100,8 @@ class BirdGeometry extends THREE.BufferGeometry {
 };
 
 var container;
-var camera:THREE.PerspectiveCamera, scene:THREE.Scene;
-var renderer: THREE.WebGLRenderer;
+var camera:PerspectiveCamera, scene:Scene;
+var renderer: WebGLRenderer;
 var mouseX = 0, mouseY = 0;
 
 var windowHalfX = window.innerWidth / 2;
@@ -124,14 +126,14 @@ function init() {
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
+	camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
 	camera.position.z = 350;
 
-	scene = new THREE.Scene();
-	scene.background = new THREE.Color( 0xffffff );
-	scene.fog = new THREE.Fog( 0xffffff, 100, 1000 );
+	scene = new Scene();
+	scene.background = new Color( 0xffffff );
+	scene.fog = new Fog( 0xffffff, 100, 1000 );
 
-	renderer = new THREE.WebGLRenderer();
+	renderer = new WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild( renderer.domElement );
@@ -209,13 +211,13 @@ function initComputeRenderer() {
 	velocityUniforms[ "alignmentDistance" ] = { value: 1.0 };
 	velocityUniforms[ "cohesionDistance" ] = { value: 1.0 };
 	velocityUniforms[ "freedomFactor" ] = { value: 1.0 };
-	velocityUniforms[ "predator" ] = { value: new THREE.Vector3() };
+	velocityUniforms[ "predator" ] = { value: new Vector3() };
 	velocityVariable.material.defines.BOUNDS = BOUNDS.toFixed( 2 );
 
-	velocityVariable.wrapS = THREE.RepeatWrapping;
-	velocityVariable.wrapT = THREE.RepeatWrapping;
-	positionVariable.wrapS = THREE.RepeatWrapping;
-	positionVariable.wrapT = THREE.RepeatWrapping;
+	velocityVariable.wrapS = RepeatWrapping;
+	velocityVariable.wrapT = RepeatWrapping;
+	positionVariable.wrapS = RepeatWrapping;
+	positionVariable.wrapT = RepeatWrapping;
 
 	var error = gpuCompute.init();
 	if ( error !== null ) {
@@ -232,7 +234,7 @@ function initBirds() {
 
 	// For Vertex and Fragment
 	birdUniforms = {
-		"color": { value: new THREE.Color( 0xff2200 ) },
+		"color": { value: new Color( 0xff2200 ) },
 		"texturePosition": { value: null },
 		"textureVelocity": { value: null },
 		"time": { value: 1.0 },
@@ -249,16 +251,16 @@ function initBirds() {
 		return;
 	}
 
-	// THREE.ShaderMaterial
-	var material = new THREE.ShaderMaterial( {
+	// ShaderMaterial
+	var material = new ShaderMaterial( {
 		uniforms: birdUniforms,
 		vertexShader: <string>birdVS.textContent,
 		fragmentShader: <string>birdFS.textContent,
-		side: THREE.DoubleSide
+		side: DoubleSide
 
 	} );
 
-	var birdMesh = new THREE.Mesh( geometry, material );
+	var birdMesh = new Mesh( geometry, material );
 	birdMesh.rotation.y = Math.PI / 2;
 	birdMesh.matrixAutoUpdate = false;
 	birdMesh.updateMatrix();
@@ -267,7 +269,7 @@ function initBirds() {
 
 }
 
-function fillPositionTexture( texture:THREE.Texture) {
+function fillPositionTexture( texture:Texture) {
 
 	var theArray = texture.image.data;
 
@@ -286,7 +288,7 @@ function fillPositionTexture( texture:THREE.Texture) {
 
 }
 
-function fillVelocityTexture( texture:THREE.Texture ) {
+function fillVelocityTexture( texture:Texture ) {
 
 	var theArray = texture.image.data;
 
