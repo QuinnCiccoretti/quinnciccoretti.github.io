@@ -10,14 +10,14 @@ var BIRDS = WIDTH * WIDTH;
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
 class BirdGeometry extends THREE.BufferGeometry {
 	constructor(){
-		super()
+		super();
 		var triangles = BIRDS * 3;
 		var points = triangles * 3;
-
-		var vertices = new THREE.BufferAttribute( new Float32Array( points * 3 ), 3 );
-		var birdColors = new THREE.BufferAttribute( new Float32Array( points * 3 ), 3 );
-		var references = new THREE.BufferAttribute( new Float32Array( points * 2 ), 2 );
-		var birdVertex = new THREE.BufferAttribute( new Float32Array( points ), 1 );
+		var vert_arr = new Float32Array( points * 3 );
+		var birdColors_arr = new Float32Array( points * 3 );
+		var ref_arr = new Float32Array( points * 2 );
+		var birdVert_arr = new Float32Array( points );
+		
 		this.setAttribute( 'position', vertices );
 		this.setAttribute( 'birdColor', birdColors );
 		this.setAttribute( 'reference', references );
@@ -31,7 +31,7 @@ class BirdGeometry extends THREE.BufferGeometry {
 
 		for ( var i = 0; i < nine_numbers.length; i ++ ) {
 
-			<any>(vertices.array)[ v++ ] = nine_numbers[ i ];
+			vert_arr[ v++ ] = nine_numbers[ i ];
 
 		}
 
@@ -75,28 +75,26 @@ class BirdGeometry extends THREE.BufferGeometry {
 			~ ~ ( v / 9 ) / BIRDS * 0x666666
 		);
 
-		<any>birdColors.array[ v * 3 + 0 ] = c.r;
-		<any>birdColors.array[ v * 3 + 1 ] = c.g;
-		<any>birdColors.array[ v * 3 + 2 ] = c.b;
+		birdColors_arr[ v * 3 + 0 ] = c.r;
+		birdColors_arr[ v * 3 + 1 ] = c.g;
+		birdColors_arr[ v * 3 + 2 ] = c.b;
 
-		<any>references.array[ v * 2 ] = x;
-		<any>references.array[ v * 2 + 1 ] = y;
+		ref_arr[ v * 2 ] = x;
+		ref_arr[ v * 2 + 1 ] = y;
 
-		<any>birdVertex.array[ v ] = v % 9;
+		birdVert_arr[ v ] = v % 9;
 
 	}
 
 	this.scale( 0.2, 0.2, 0.2 );
+	var vertices:any = new THREE.BufferAttribute( vert_arr, 3 );
+	var birdColors:any = new THREE.BufferAttribute(birdColors_arr , 3 );
+	var references:any = new THREE.BufferAttribute( ref_arr, 2 );
+	var birdVertex:any = new THREE.BufferAttribute(birdVert_arr , 1 );
 	}
-	
-	
-
 	
 
 };
-
-BirdGeometry.prototype = Object.create( THREE.BufferGeometry.prototype );
-
 
 var container;
 var camera:THREE.PerspectiveCamera, scene:THREE.Scene;
@@ -113,9 +111,9 @@ var last = performance.now();
 var gpuCompute:GPUComputationRenderer;
 var velocityVariable:any;
 var positionVariable:any;
-var positionUniforms;
-var velocityUniforms;
-var birdUniforms;
+var positionUniforms:any;
+var velocityUniforms:any;
+var birdUniforms:any;
 
 init();
 animate();
@@ -180,18 +178,19 @@ function initComputeRenderer() {
 	fillVelocityTexture( dtVelocity );
 
 	var fragShaderV = document.getElementById( 'fragmentShaderVelocity' );
-	if(fragShaderV){
-		velocityVariable = gpuCompute.addVariable( "textureVelocity", <string>fragShaderV.textContent, dtVelocity );
-	}else{
+	if(!fragShaderV){
 		console.log("Could not find fragment shader Velocity in the document");
+		return;
 	}
+	velocityVariable = gpuCompute.addVariable( "textureVelocity", <string>fragShaderV.textContent, dtVelocity );
+
 
 	var fragShaderP = document.getElementById( 'fragmentShaderPosition' );
-	if(fragShaderP){
-		positionVariable = gpuCompute.addVariable( "texturePosition", <string>fragShaderP.textContent, dtPosition );
-	}else{
+	if(!fragShaderP){
 		console.log("Could not find fragment shader Position in the document");
+		return;
 	}
+	positionVariable = gpuCompute.addVariable( "texturePosition", <string>fragShaderP.textContent, dtPosition );
 	
 
 	gpuCompute.setVariableDependencies( velocityVariable, [ positionVariable, velocityVariable ] );
@@ -238,12 +237,22 @@ function initBirds() {
 		"time": { value: 1.0 },
 		"delta": { value: 0.0 }
 	};
+	var birdVS = document.getElementById( 'birdVS' );
+	if(!birdVS){
+		console.log("Could not find birdVS element")
+		return;
+	}
+	var birdFS = document.getElementById( 'birdFS' );
+	if(!birdFS){
+		console.log("Could not find birdFS element")
+		return;
+	}
 
 	// THREE.ShaderMaterial
 	var material = new THREE.ShaderMaterial( {
 		uniforms: birdUniforms,
-		vertexShader: document.getElementById( 'birdVS' ).textContent,
-		fragmentShader: document.getElementById( 'birdFS' ).textContent,
+		vertexShader: <string>birdVS.textContent,
+		fragmentShader: <string>birdFS.textContent,
 		side: THREE.DoubleSide
 
 	} );
@@ -257,7 +266,7 @@ function initBirds() {
 
 }
 
-function fillPositionTexture( texture ) {
+function fillPositionTexture( texture:THREE.Texture) {
 
 	var theArray = texture.image.data;
 
@@ -276,7 +285,7 @@ function fillPositionTexture( texture ) {
 
 }
 
-function fillVelocityTexture( texture ) {
+function fillVelocityTexture( texture:THREE.Texture ) {
 
 	var theArray = texture.image.data;
 
@@ -308,14 +317,14 @@ function onWindowResize() {
 
 }
 
-function onDocumentMouseMove( event ) {
+function onDocumentMouseMove( event:MouseEvent ) {
 
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
 
 }
 
-function onDocumentTouchStart( event ) {
+function onDocumentTouchStart( event:TouchEvent) {
 
 	if ( event.touches.length === 1 ) {
 
@@ -328,7 +337,7 @@ function onDocumentTouchStart( event ) {
 
 }
 
-function onDocumentTouchMove( event ) {
+function onDocumentTouchMove( event:TouchEvent ) {
 
 	if ( event.touches.length === 1 ) {
 
@@ -373,8 +382,8 @@ function render() {
 
 	gpuCompute.compute();
 
-	birdUniforms[ "texturePosition" ].value = gpuCompute.getCurrentRenderTarget( positionVariable ).texture;
-	birdUniforms[ "textureVelocity" ].value = gpuCompute.getCurrentRenderTarget( velocityVariable ).texture;
+	birdUniforms[ "texturePosition" ].value = (<any>(gpuCompute.getCurrentRenderTarget( positionVariable ))).texture;
+	birdUniforms[ "textureVelocity" ].value = (<any>(gpuCompute.getCurrentRenderTarget( velocityVariable ))).texture;
 
 	renderer.render( scene, camera );
 
