@@ -1,6 +1,6 @@
-import * as THREE from '../build/three.module.js';
+import * as THREE from 'three';
 
-import { GPUComputationRenderer } from './jsm/misc/GPUComputationRenderer.js';
+import { GPUComputationRenderer } from 'three/examples/jsm/misc/GPUComputationRenderer.js';
 
 /* TEXTURE WIDTH FOR SIMULATION */
 var WIDTH = 32;
