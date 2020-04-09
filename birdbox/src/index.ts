@@ -18,10 +18,7 @@ class BirdGeometry extends THREE.BufferGeometry {
 		var ref_arr = new Float32Array( points * 2 );
 		var birdVert_arr = new Float32Array( points );
 		
-		this.setAttribute( 'position', vertices );
-		this.setAttribute( 'birdColor', birdColors );
-		this.setAttribute( 'reference', references );
-		this.setAttribute( 'birdVertex', birdVertex );
+		
 		// this.setAttribute( 'normal', new Float32Array( points * 3 ), 3 );
 
 
@@ -87,10 +84,14 @@ class BirdGeometry extends THREE.BufferGeometry {
 	}
 
 	this.scale( 0.2, 0.2, 0.2 );
-	var vertices:any = new THREE.BufferAttribute( vert_arr, 3 );
-	var birdColors:any = new THREE.BufferAttribute(birdColors_arr , 3 );
-	var references:any = new THREE.BufferAttribute( ref_arr, 2 );
-	var birdVertex:any = new THREE.BufferAttribute(birdVert_arr , 1 );
+	var vertices = new THREE.BufferAttribute( vert_arr, 3 );
+	var birdColors = new THREE.BufferAttribute(birdColors_arr , 3 );
+	var references = new THREE.BufferAttribute( ref_arr, 2 );
+	var birdVertex = new THREE.BufferAttribute(birdVert_arr , 1 );
+	this.setAttribute( 'position', vertices );
+	this.setAttribute( 'birdColor', birdColors );
+	this.setAttribute( 'reference', references );
+	this.setAttribute( 'birdVertex', birdVertex );
 	}
 	
 
