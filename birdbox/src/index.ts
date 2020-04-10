@@ -118,13 +118,8 @@ var positionUniforms:any;
 var velocityUniforms:any;
 var birdUniforms:any;
 
-init();
-animate();
 
-function init() {
-
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
+export function initBirdBox(container:HTMLElement) {
 
 	camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
 	camera.position.z = 350;
@@ -355,9 +350,9 @@ function onDocumentTouchMove( event:TouchEvent ) {
 
 //
 
-function animate() {
+export function animateBirdbox() {
 
-	requestAnimationFrame( animate );
+	requestAnimationFrame( animateBirdbox );
 
 	render();
 

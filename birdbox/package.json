@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "webpack"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,7 @@
     "@types/node": "^13.9.1",
     "file-loader": "^5.1.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "three": "^0.114.0"

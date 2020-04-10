@@ -1,37 +1,28 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const THREE = __importStar(require("three"));
+const three_1 = require("three");
+const three_2 = require("three");
+const three_3 = require("three");
+const three_4 = require("three");
 const GPUComputationRenderer_js_1 = require("three/examples/jsm/misc/GPUComputationRenderer.js");
 /* TEXTURE WIDTH FOR SIMULATION */
 var WIDTH = 32;
 var BIRDS = WIDTH * WIDTH;
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
-class BirdGeometry extends THREE.BufferGeometry {
+class BirdGeometry extends three_1.BufferGeometry {
     constructor() {
         super();
         var triangles = BIRDS * 3;
         var points = triangles * 3;
-        var vertices = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
-        var birdColors = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
-        var references = new THREE.BufferAttribute(new Float32Array(points * 2), 2);
-        var birdVertex = new THREE.BufferAttribute(new Float32Array(points), 1);
-        this.setAttribute('position', vertices);
-        this.setAttribute('birdColor', birdColors);
-        this.setAttribute('reference', references);
-        this.setAttribute('birdVertex', birdVertex);
+        var vert_arr = new Float32Array(points * 3);
+        var birdColors_arr = new Float32Array(points * 3);
+        var ref_arr = new Float32Array(points * 2);
+        var birdVert_arr = new Float32Array(points);
         // this.setAttribute( 'normal', new Float32Array( points * 3 ), 3 );
         var v = 0;
         function verts_push(nine_numbers) {
             for (var i = 0; i < nine_numbers.length; i++) {
-                (vertices.array)[v++];
-                nine_numbers[i];
+                vert_arr[v++] = nine_numbers[i];
             }
         }
         var wingsSpan = 20;
@@ -59,26 +50,27 @@ class BirdGeometry extends THREE.BufferGeometry {
             var i = ~~(v / 3);
             var x = (i % WIDTH) / WIDTH;
             var y = ~~(i / WIDTH) / WIDTH;
-            var c = new THREE.Color(0x444444 +
+            var c = new three_2.Color(0x444444 +
                 ~~(v / 9) / BIRDS * 0x666666);
-            birdColors.array[v * 3 + 0];
-            c.r;
-            birdColors.array[v * 3 + 1];
-            c.g;
-            birdColors.array[v * 3 + 2];
-            c.b;
-            references.array[v * 2];
-            x;
-            references.array[v * 2 + 1];
-            y;
-            birdVertex.array[v];
-            v % 9;
+            birdColors_arr[v * 3 + 0] = c.r;
+            birdColors_arr[v * 3 + 1] = c.g;
+            birdColors_arr[v * 3 + 2] = c.b;
+            ref_arr[v * 2] = x;
+            ref_arr[v * 2 + 1] = y;
+            birdVert_arr[v] = v % 9;
         }
         this.scale(0.2, 0.2, 0.2);
+        var vertices = new three_1.BufferAttribute(vert_arr, 3);
+        var birdColors = new three_1.BufferAttribute(birdColors_arr, 3);
+        var references = new three_1.BufferAttribute(ref_arr, 2);
+        var birdVertex = new three_1.BufferAttribute(birdVert_arr, 1);
+        this.setAttribute('position', vertices);
+        this.setAttribute('birdColor', birdColors);
+        this.setAttribute('reference', references);
+        this.setAttribute('birdVertex', birdVertex);
     }
 }
 ;
-BirdGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 var container;
 var camera, scene;
 var renderer;
@@ -93,17 +85,13 @@ var positionVariable;
 var positionUniforms;
 var velocityUniforms;
 var birdUniforms;
-init();
-animate();
-function init() {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
+function initBirdBox(container) {
+    camera = new three_2.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
     camera.position.z = 350;
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
-    scene.fog = new THREE.Fog(0xffffff, 100, 1000);
-    renderer = new THREE.WebGLRenderer();
+    scene = new three_2.Scene();
+    scene.background = new three_2.Color(0xffffff);
+    scene.fog = new three_2.Fog(0xffffff, 100, 1000);
+    renderer = new three_3.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
@@ -128,16 +116,25 @@ function init() {
     valuesChanger();
     initBirds();
 }
+exports.initBirdBox = initBirdBox;
 function initComputeRenderer() {
     gpuCompute = new GPUComputationRenderer_js_1.GPUComputationRenderer(WIDTH, WIDTH, renderer);
     var dtPosition = gpuCompute.createTexture();
     var dtVelocity = gpuCompute.createTexture();
     fillPositionTexture(dtPosition);
     fillVelocityTexture(dtVelocity);
-    var fragShader = ;
-    if ()
-        velocityVariable = gpuCompute.addVariable("textureVelocity", (.textContent), dtVelocity);
-    positionVariable = gpuCompute.addVariable("texturePosition", document.getElementById('fragmentShaderPosition').textContent, dtPosition);
+    var fragShaderV = document.getElementById('fragmentShaderVelocity');
+    if (!fragShaderV) {
+        console.log("Could not find fragment shader Velocity in the document");
+        return;
+    }
+    velocityVariable = gpuCompute.addVariable("textureVelocity", fragShaderV.textContent, dtVelocity);
+    var fragShaderP = document.getElementById('fragmentShaderPosition');
+    if (!fragShaderP) {
+        console.log("Could not find fragment shader Position in the document");
+        return;
+    }
+    positionVariable = gpuCompute.addVariable("texturePosition", fragShaderP.textContent, dtPosition);
     gpuCompute.setVariableDependencies(velocityVariable, [positionVariable, velocityVariable]);
     gpuCompute.setVariableDependencies(positionVariable, [positionVariable, velocityVariable]);
     positionUniforms = positionVariable.material.uniforms;
@@ -151,12 +148,12 @@ function initComputeRenderer() {
     velocityUniforms["alignmentDistance"] = { value: 1.0 };
     velocityUniforms["cohesionDistance"] = { value: 1.0 };
     velocityUniforms["freedomFactor"] = { value: 1.0 };
-    velocityUniforms["predator"] = { value: new THREE.Vector3() };
+    velocityUniforms["predator"] = { value: new three_3.Vector3() };
     velocityVariable.material.defines.BOUNDS = BOUNDS.toFixed(2);
-    velocityVariable.wrapS = THREE.RepeatWrapping;
-    velocityVariable.wrapT = THREE.RepeatWrapping;
-    positionVariable.wrapS = THREE.RepeatWrapping;
-    positionVariable.wrapT = THREE.RepeatWrapping;
+    velocityVariable.wrapS = three_3.RepeatWrapping;
+    velocityVariable.wrapT = three_3.RepeatWrapping;
+    positionVariable.wrapS = three_3.RepeatWrapping;
+    positionVariable.wrapT = three_3.RepeatWrapping;
     var error = gpuCompute.init();
     if (error !== null) {
         console.error(error);
@@ -166,20 +163,30 @@ function initBirds() {
     var geometry = new BirdGeometry();
     // For Vertex and Fragment
     birdUniforms = {
-        "color": { value: new THREE.Color(0xff2200) },
+        "color": { value: new three_2.Color(0xff2200) },
         "texturePosition": { value: null },
         "textureVelocity": { value: null },
         "time": { value: 1.0 },
         "delta": { value: 0.0 }
     };
-    // THREE.ShaderMaterial
-    var material = new THREE.ShaderMaterial({
+    var birdVS = document.getElementById('birdVS');
+    if (!birdVS) {
+        console.log("Could not find birdVS element");
+        return;
+    }
+    var birdFS = document.getElementById('birdFS');
+    if (!birdFS) {
+        console.log("Could not find birdFS element");
+        return;
+    }
+    // ShaderMaterial
+    var material = new three_4.ShaderMaterial({
         uniforms: birdUniforms,
-        vertexShader: document.getElementById('birdVS').textContent,
-        fragmentShader: document.getElementById('birdFS').textContent,
-        side: THREE.DoubleSide
+        vertexShader: birdVS.textContent,
+        fragmentShader: birdFS.textContent,
+        side: three_4.DoubleSide
     });
-    var birdMesh = new THREE.Mesh(geometry, material);
+    var birdMesh = new three_4.Mesh(geometry, material);
     birdMesh.rotation.y = Math.PI / 2;
     birdMesh.matrixAutoUpdate = false;
     birdMesh.updateMatrix();
@@ -235,10 +242,11 @@ function onDocumentTouchMove(event) {
     }
 }
 //
-function animate() {
-    requestAnimationFrame(animate);
+function animateBirdbox() {
+    requestAnimationFrame(animateBirdbox);
     render();
 }
+exports.animateBirdbox = animateBirdbox;
 function render() {
     var now = performance.now();
     var delta = (now - last) / 1000;
@@ -255,7 +263,7 @@ function render() {
     mouseX = 10000;
     mouseY = 10000;
     gpuCompute.compute();
-    birdUniforms["texturePosition"].value = gpuCompute.getCurrentRenderTarget(positionVariable).texture;
-    birdUniforms["textureVelocity"].value = gpuCompute.getCurrentRenderTarget(velocityVariable).texture;
+    birdUniforms["texturePosition"].value = (gpuCompute.getCurrentRenderTarget(positionVariable)).texture;
+    birdUniforms["textureVelocity"].value = (gpuCompute.getCurrentRenderTarget(velocityVariable)).texture;
     renderer.render(scene, camera);
 }

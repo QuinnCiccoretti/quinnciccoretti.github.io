@@ -1,5 +1,5 @@
 import {PerspectiveCamera, Scene, Group, Color} from 'three';
-
+import {initBirdBox, animateBirdbox} from 'birdbox';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
@@ -23,7 +23,9 @@ class Element extends CSS3DObject {
 	}
 
 };
-
+var cage = document.getElementById('cage');
+initBirdBox(<HTMLElement>cage)
+animateBirdbox();
 init();
 animate();
 

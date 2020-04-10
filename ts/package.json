@@ -25,6 +25,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "birdbox": "file:../birdbox",
     "three": "^0.114.0"
   }
 }
