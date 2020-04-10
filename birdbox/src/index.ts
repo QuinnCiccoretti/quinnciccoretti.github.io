@@ -5,7 +5,7 @@ import {ShaderMaterial, Mesh, DoubleSide, Texture} from 'three';
 import { GPUComputationRenderer } from 'three/examples/jsm/misc/GPUComputationRenderer.js';
 
 /* TEXTURE WIDTH FOR SIMULATION */
-var WIDTH = 32;
+var WIDTH = 16;
 
 var BIRDS = WIDTH * WIDTH;
 
@@ -130,7 +130,8 @@ export function initBirdBox(container:HTMLElement) {
 
 	renderer = new WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth/2, window.innerHeight / 2 );
+	renderer.domElement.style.width = "100%";
 	container.appendChild( renderer.domElement );
 
 	initComputeRenderer();

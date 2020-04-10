@@ -6,7 +6,7 @@ const three_3 = require("three");
 const three_4 = require("three");
 const GPUComputationRenderer_js_1 = require("three/examples/jsm/misc/GPUComputationRenderer.js");
 /* TEXTURE WIDTH FOR SIMULATION */
-var WIDTH = 32;
+var WIDTH = 16;
 var BIRDS = WIDTH * WIDTH;
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
 class BirdGeometry extends three_1.BufferGeometry {
@@ -93,7 +93,8 @@ function initBirdBox(container) {
     scene.fog = new three_2.Fog(0xffffff, 100, 1000);
     renderer = new three_3.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    renderer.domElement.style.width = "100%";
     container.appendChild(renderer.domElement);
     initComputeRenderer();
     document.addEventListener('mousemove', onDocumentMouseMove, false);
