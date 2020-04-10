@@ -86,14 +86,14 @@ var positionUniforms;
 var velocityUniforms;
 var birdUniforms;
 function initBirdBox(container) {
-    camera = new three_2.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
+    camera = new three_2.PerspectiveCamera(75, window.innerWidth / (window.innerHeight * 1.55), 1, 3000);
     camera.position.z = 350;
     scene = new three_2.Scene();
     scene.background = new three_2.Color(0xffffff);
     scene.fog = new three_2.Fog(0xffffff, 100, 1000);
     renderer = new three_3.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    renderer.setSize(window.innerWidth, window.innerHeight / 1.55);
     renderer.domElement.style.width = "100%";
     container.appendChild(renderer.domElement);
     initComputeRenderer();
@@ -101,7 +101,6 @@ function initBirdBox(container) {
     document.addEventListener('touchstart', onDocumentTouchStart, false);
     document.addEventListener('touchmove', onDocumentTouchMove, false);
     //
-    window.addEventListener('resize', onWindowResize, false);
     var effectController = {
         separation: 20.0,
         alignment: 20.0,
@@ -216,13 +215,6 @@ function fillVelocityTexture(texture) {
         theArray[k + 2] = z * 10;
         theArray[k + 3] = 1;
     }
-}
-function onWindowResize() {
-    windowHalfX = window.innerWidth / 2;
-    windowHalfY = window.innerHeight / 2;
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 function onDocumentMouseMove(event) {
     mouseX = event.clientX - windowHalfX;

@@ -120,8 +120,7 @@ var birdUniforms:any;
 
 
 export function initBirdBox(container:HTMLElement) {
-
-	camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
+	camera = new PerspectiveCamera( 75, window.innerWidth / (window.innerHeight*1.55), 1, 3000 );
 	camera.position.z = 350;
 
 	scene = new Scene();
@@ -130,7 +129,7 @@ export function initBirdBox(container:HTMLElement) {
 
 	renderer = new WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth/2, window.innerHeight / 2 );
+	renderer.setSize( window.innerWidth, window.innerHeight / 1.55 );
 	renderer.domElement.style.width = "100%";
 	container.appendChild( renderer.domElement );
 
@@ -142,7 +141,6 @@ export function initBirdBox(container:HTMLElement) {
 
 	//
 
-	window.addEventListener( 'resize', onWindowResize, false );
 
 
 	var effectController = {
@@ -303,18 +301,6 @@ function fillVelocityTexture( texture:Texture ) {
 
 }
 
-
-function onWindowResize() {
-
-	windowHalfX = window.innerWidth / 2;
-	windowHalfY = window.innerHeight / 2;
-
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
-}
 
 function onDocumentMouseMove( event:MouseEvent ) {
 
