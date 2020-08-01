@@ -8,14 +8,14 @@
 #projcontainer{
 	height: 10%;
 }
-iframe{
-	width: 100%;
-	height:500px;
-}
 hr{
 	width: 100%;
 }
-
+iframe{
+	width:260px;
+	height:315px;
+	position: static;
+}
 .neeson{
 	background-image: url(img/neeson.png);
 	width: 100%;
@@ -105,10 +105,10 @@ background-color: var(--color1);	/*z-index: 9999;*/
 .thumbnail {
 
 	padding: 0 0 15px 0;
-	border: 1px solid gray;
+	border-bottom: 1px solid gray;
 }
 .thumbnail:hover{
-	border: 10px solid var(--color1);
+	border-bottom: 10px solid var(--color1);
 
 }
 .thumbnail img {
