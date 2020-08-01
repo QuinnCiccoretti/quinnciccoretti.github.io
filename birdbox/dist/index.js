@@ -97,9 +97,9 @@ function initBirdBox(container) {
     renderer.domElement.style.width = "100%";
     container.appendChild(renderer.domElement);
     initComputeRenderer();
-    document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('touchstart', onDocumentTouchStart, false);
-    document.addEventListener('touchmove', onDocumentTouchMove, false);
+    //document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    //document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    //document.addEventListener( 'touchmove', onDocumentTouchMove, false );
     //
     var effectController = {
         separation: 20.0,
@@ -219,21 +219,21 @@ function fillVelocityTexture(texture) {
 function onDocumentMouseMove(event) {
     mouseX = event.clientX - windowHalfX;
     mouseY = event.clientY - windowHalfY;
+    console.log("MouseMove");
 }
 function onDocumentTouchStart(event) {
-    if (event.touches.length === 1) {
+    if (event.touches.length > 1) {
         event.preventDefault();
-        mouseX = event.touches[0].pageX - windowHalfX;
-        mouseY = event.touches[0].pageY - windowHalfY;
     }
 }
-function onDocumentTouchMove(event) {
-    if (event.touches.length === 1) {
-        event.preventDefault();
-        mouseX = event.touches[0].pageX - windowHalfX;
-        mouseY = event.touches[0].pageY - windowHalfY;
-    }
-}
+//function onDocumentTouchMove( event:TouchEvent ) {
+//if ( event.touches.length === 1 ) {
+//event.preventDefault();
+//mouseX = event.touches[ 0 ].pageX - windowHalfX;
+//mouseY = event.touches[ 0 ].pageY - windowHalfY;
+//console.log("TouchEvent");
+//}
+//}
 //
 function animateBirdbox() {
     requestAnimationFrame(animateBirdbox);

@@ -135,9 +135,9 @@ export function initBirdBox(container:HTMLElement) {
 
 	initComputeRenderer();
 
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-	document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+	//document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	//document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+	//document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 
 	//
 
@@ -306,34 +306,33 @@ function onDocumentMouseMove( event:MouseEvent ) {
 
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
+    console.log("MouseMove");
 
 }
 
 function onDocumentTouchStart( event:TouchEvent) {
 
-	if ( event.touches.length === 1 ) {
+	if ( event.touches.length > 1 ) {
 
 		event.preventDefault();
-
-		mouseX = event.touches[ 0 ].pageX - windowHalfX;
-		mouseY = event.touches[ 0 ].pageY - windowHalfY;
 
 	}
 
 }
 
-function onDocumentTouchMove( event:TouchEvent ) {
+//function onDocumentTouchMove( event:TouchEvent ) {
 
-	if ( event.touches.length === 1 ) {
+	//if ( event.touches.length === 1 ) {
 
-		event.preventDefault();
+		//event.preventDefault();
 
-		mouseX = event.touches[ 0 ].pageX - windowHalfX;
-		mouseY = event.touches[ 0 ].pageY - windowHalfY;
+		//mouseX = event.touches[ 0 ].pageX - windowHalfX;
+		//mouseY = event.touches[ 0 ].pageY - windowHalfY;
+    //console.log("TouchEvent");
 
-	}
+	//}
 
-}
+//}
 
 //
 
