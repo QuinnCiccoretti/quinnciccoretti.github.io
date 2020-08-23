@@ -23,8 +23,10 @@ class Element extends CSS3DObject {
 
 };
 var cage = document.getElementById('cage');
-init();
-animate();
+document.addEventListener('DOMContentLoaded', function(){
+  init();
+  animate();
+});
 
 function init() {
 
