@@ -1,7 +1,17 @@
 body{
-  width: 90%;
+  width: 100%;
+  font-size: 35px;
 }
 .inputtxt{
   background-color: #cccccc;
   font-family: monospace;
+}
+pre{
+  font-size: 20px;
+}
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
