@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 var camera:PerspectiveCamera;
-var scene:Scene;
+let scene = new Scene();
 var renderer: CSS3DRenderer;
 var controls: OrbitControls;
 
@@ -30,31 +30,39 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function init() {
 
-	var container = document.getElementById( 'projcontainer' );
-
+	let container = document.getElementById( 'projcontainer' );
+  if(!container){
+    return;
+  }
 	camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
 	camera.position.set( 500, 350, 750 ).multiplyScalar(0.7);
-
-	scene = new Scene();
 	
 	renderer = new CSS3DRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight / 1.55);
+  renderer.setSize( window.innerWidth, window.innerHeight / 1.55);
 	(<HTMLElement>container).appendChild( renderer.domElement );
 	renderer.domElement.style.width = "100%";
 	// renderer.domElement.style.height = "100%";
 
-	var group = new Group();
-	var p1 = document.getElementById("imm");
-	var p2 = document.getElementById("sicko");
-	var p3 = document.getElementById("physvr");
-	var p4 = document.getElementById("stacks");
-	const separation = 150;
+	let group = new Group();
+	let p1 = document.getElementById("imm");
+	let p2 = document.getElementById("sicko");
+	let p3 = document.getElementById("physvr");
+	let p4 = document.getElementById("stacks");
+  let p5 = document.getElementById("rc");
+	const radius = 180;
 	const height = 50;
-	group.add( new Element( p1, 0, height, separation, 0 ) );
-	group.add( new Element( p2, separation, height, 0, Math.PI / 2 ) );
-	group.add( new Element( p3, 0, height, - separation, Math.PI ) );
-	group.add( new Element( p4, - separation, height, 0, - Math.PI / 2 ) );
-	scene.add( group );
+  let plist =[p1, p2, p3, p4, p5];
+  let nProjects = plist.length;
+  for(let i = 0; i < nProjects; i++){
+     let theta = 2 * Math.PI * i / nProjects;
+     let x = radius * Math.cos(theta);
+     let y = radius * Math.sin(theta);
+     let child = plist[i];
+     group.add( new Element( <HTMLElement>child, x, height, y, - theta + (Math.PI/2)) );
+
+  }
+
+  scene.add( group );
 	
 
 	controls = new OrbitControls( camera, renderer.domElement);
@@ -90,4 +98,7 @@ function animate() {
 	controls.update();
 	renderer.render( scene, camera );
 
+}
+window.onresize = function(){
+  renderer.setSize( window.innerWidth, window.innerHeight / 1.55);
 }
