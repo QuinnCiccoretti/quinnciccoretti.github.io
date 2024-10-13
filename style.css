@@ -55,7 +55,7 @@ iframe{
 .jumbotron {
 background-color: var(--color1);
 color: var(--color2);
-padding: 100px 25px;
+padding: 100px;
 margin-bottom: 0px;
 }
 
